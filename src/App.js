@@ -1,9 +1,9 @@
 import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import CardList from './components/card-list/card-list.component'
+import {CardList} from './components/card-list/card-list.component'
 
-class App extends React.Component {
+class App extends React.Component { 
   constructor() {
     super();
 
@@ -13,16 +13,14 @@ class App extends React.Component {
   }
   componentDidMount() {
     fetch('https://jsonplaceholder.typicode.com/users')
-      .then(response => response.json()
-      .then(users => this.setState({monsters:users})))
+      .then(response => response.json())
+      .then(users => this.setState({monsters:users}))
+      .catch(err => console.log(err))
   }
   render() {
     return (
       <div className="App">
-        <CardList name="jason"/>
-        {this.state.monsters.map(monster => (
-          <h1 key={monster.id}>{monster.name}</h1>
-        ))}
+        <CardList monsters={this.state.monsters} /> 
       </div>
     );
   }
